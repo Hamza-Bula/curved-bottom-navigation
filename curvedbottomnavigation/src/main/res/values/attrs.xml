@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomBottomNavigationView">
+        <!-- Colors -->
+        <attr name="navBackgroundColor" format="color" />
+        <attr name="selectedIconBackgroundColor" format="color" />
+        <attr name="borderColor" format="color" />
+        <attr name="selectedIconColor" format="color" />
+        <attr name="unselectedIconColor" format="color" />
+
+        <!-- Dimensions -->
+        <attr name="navHeight" format="dimension" />
+        <attr name="bubbleRadius" format="dimension" />
+        <attr name="selectedIconSize" format="dimension" />
+        <attr name="unselectedIconSize" format="dimension" />
+        <attr name="selectedIconBackgroundRadius" format="dimension" />
+        <attr name="borderStrokeWidth" format="dimension" />
+        <attr name="selectedIconY" format="dimension" />
+
+        <!-- Bubble Shape Properties -->
+        <attr name="bubbleWidthMultiplier" format="float" />
+        <attr name="bubbleHeightFactor" format="float" />
+        <attr name="bubbleCurveFactor" format="float" />
+        <attr name="bubbleEdgeFactor" format="float" />
+
+        <!-- Animation Properties -->
+        <attr name="bubbleAnimationDuration" format="integer" />
+        <attr name="iconAnimationDuration" format="integer" />
+
+        <!-- Icon Animation Factors -->
+        <attr name="iconScaleMin" format="float" />
+        <attr name="iconScaleMax" format="float" />
+        <attr name="iconScaleOvershoot" format="float" />
+        <attr name="iconPositionOvershoot" format="float" />
+    </declare-styleable>
+</resources>
