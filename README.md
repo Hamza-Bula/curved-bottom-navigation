@@ -5,6 +5,8 @@
 
 A beautiful curved bottom navigation library for Android with smooth animations.
 
+![Demo](art/demo.gif)
+
 ## Installation
 
 ### Step 1: Add JitPack repository
