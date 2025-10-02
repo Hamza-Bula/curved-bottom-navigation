@@ -1,73 +1,66 @@
 # Curved Bottom Navigation
 
 [![](https://jitpack.io/v/Hamza-Bula/curved-bottom-navigation.svg)](https://jitpack.io/#Hamza-Bula/curved-bottom-navigation)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![API](https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=24)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
-Curved bottom navigation library for Android with smooth animations.
+A modern Android bottom navigation bar with a unique curved bubble design and smooth animations.
 
 ![Demo](art/demo.gif)
 
-Show Image
-Show Image
-Show Image
-A modern Android bottom navigation bar with a unique curved bubble design and smooth animations.
-Show Image
-Features
+## Features
 
-Curved bubble design - Unique elevation effect for selected items
-Smooth animations - Fluid transitions with customizable interpolators
-Highly customizable - Full control over colors, sizes, and animations
-Easy to use - Simple API with XML and programmatic configuration
-Lightweight - Minimal dependencies
+- Curved bubble design with elevation effect
+- Smooth animations with customizable interpolators
+- Highly customizable colors, sizes, and animations
+- Simple API with XML and programmatic configuration
+- Lightweight with minimal dependencies
 
-Download
-Add JitPack repository to your root settings.gradle.kts:
-kotlindependencyResolutionManagement {
+## Download
+
+Add JitPack repository to your `settings.gradle.kts`:
+```kotlin
+dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
         maven { url = uri("https://jitpack.io") }
     }
 }
-Add the dependency in your module's build.gradle.kts:
+Add the dependency:
 kotlindependencies {
     implementation("com.github.Hamza-Bula:curved-bottom-navigation:1.0.0")
 }
 Usage
-1. Create Menu Resource
-Create res/menu/bottom_nav_menu.xml:
+Create menu resource file res/menu/bottom_nav_menu.xml:
 xml<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_home"
         android:title="Home" />
-    
     <item
         android:id="@+id/nav_dashboard"
         android:icon="@drawable/ic_dashboard"
         android:title="Dashboard" />
-    
     <item
         android:id="@+id/nav_notifications"
         android:icon="@drawable/ic_notifications"
         android:title="Notifications" />
-    
     <item
         android:id="@+id/nav_profile"
         android:icon="@drawable/ic_profile"
         android:title="Profile" />
 </menu>
-2. Add to Layout
+Add view to your layout:
 xml<com.hamza.curvedbottomnavigation.CustomBottomNavigationView
     android:id="@+id/bottom_navigation"
     android:layout_width="match_parent"
     android:layout_height="55dp"
     app:layout_constraintBottom_toBottomOf="parent" />
-3. Setup in Activity/Fragment
+Setup in your Activity:
 kotlinval bottomNavigation = findViewById<CustomBottomNavigationView>(R.id.bottom_navigation)
 
-// Set navigation items
 bottomNavigation.setNavigationItems(
     listOf(
         NavItem(R.id.nav_home, R.drawable.ic_home, "Home"),
@@ -77,7 +70,6 @@ bottomNavigation.setNavigationItems(
     )
 )
 
-// Handle selection
 bottomNavigation.setOnItemSelectedListener(object : CustomBottomNavigationView.OnItemSelectedListener {
     override fun onItemSelected(itemId: Int) {
         when (itemId) {
@@ -89,48 +81,29 @@ bottomNavigation.setOnItemSelectedListener(object : CustomBottomNavigationView.O
     }
 })
 Customization
-XML Attributes
+XML attributes:
 xml<com.hamza.curvedbottomnavigation.CustomBottomNavigationView
     android:id="@+id/bottom_navigation"
     android:layout_width="match_parent"
     android:layout_height="55dp"
-    
     app:navBackgroundColor="#2E2E2E"
     app:selectedIconBackgroundColor="#FF5722"
     app:selectedIconColor="#FFFFFF"
     app:unselectedIconColor="#AAAAAA"
-    app:borderColor="#FFFFFF"
-    
     app:bubbleRadius="200dp"
-    app:selectedIconSize="68dp"
-    app:unselectedIconSize="64dp"
-    
     app:bubbleAnimationDuration="500"
     app:iconAnimationDuration="1000" />
-Programmatically
+Programmatically:
 kotlinbottomNavigation.apply {
     navBackgroundColor = Color.parseColor("#2E2E2E")
     selectedIconBackgroundColor = Color.parseColor("#FF5722")
-    selectedIconColor = Color.WHITE
     bubbleAnimationDuration = 500L
 }
-Customization Options
-AttributeTypeDefaultDescriptionnavBackgroundColorcolor#2E2E2ENavigation bar backgroundselectedIconBackgroundColorcolor#2E2E2ESelected icon backgroundborderColorcolor#FFFFFFTop border colorselectedIconColorcolor#FFFFFFSelected icon tintunselectedIconColorcolor#CCCCCCUnselected icon tintbubbleRadiusdimension200dpBubble sizeselectedIconSizedimension68dpSelected icon sizeunselectedIconSizedimension64dpUnselected icon sizebubbleAnimationDurationinteger500Bubble animation duration (ms)iconAnimationDurationinteger1000Icon animation duration (ms)bubbleWidthMultiplierfloat2.0Bubble width controlbubbleHeightFactorfloat0.6Bubble height controliconScaleOvershootfloat1.5Icon scale bounce effect
-For all available attributes, see attrs.xml.
+Available Attributes
+AttributeTypeDefaultDescriptionnavBackgroundColorcolor#2E2E2ENavigation bar backgroundselectedIconBackgroundColorcolor#2E2E2ESelected icon backgroundselectedIconColorcolor#FFFFFFSelected icon tintunselectedIconColorcolor#CCCCCCUnselected icon tintbubbleRadiusdimension200dpBubble sizeselectedIconSizedimension68dpSelected icon sizeunselectedIconSizedimension64dpUnselected icon sizebubbleAnimationDurationinteger500Animation duration (ms)
+See attrs.xml for all attributes.
 Requirements
-
-Minimum SDK: 24 (Android 7.0+)
-
-Sample App
-Check out the sample app for complete implementation examples.
-Changelog
-1.0.0
-
-Initial release
-Curved bottom navigation with smooth animations
-Support for 2-5 navigation items
-Extensive customization options
-
+Minimum SDK: 24
 License
 Copyright 2024-2025 Hamza Bula
 
