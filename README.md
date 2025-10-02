@@ -7,10 +7,21 @@ Curved bottom navigation library for Android with smooth animations.
 
 ![Demo](art/demo.gif)
 
+Show Image
+Show Image
+Show Image
+A modern Android bottom navigation bar with a unique curved bubble design and smooth animations.
+Show Image
+Features
+
+Curved bubble design - Unique elevation effect for selected items
+Smooth animations - Fluid transitions with customizable interpolators
+Highly customizable - Full control over colors, sizes, and animations
+Easy to use - Simple API with XML and programmatic configuration
+Lightweight - Minimal dependencies
+
 Download
-
 Add JitPack repository to your root settings.gradle.kts:
-
 kotlindependencyResolutionManagement {
     repositories {
         google()
@@ -18,15 +29,11 @@ kotlindependencyResolutionManagement {
         maven { url = uri("https://jitpack.io") }
     }
 }
-
 Add the dependency in your module's build.gradle.kts:
-
 kotlindependencies {
     implementation("com.github.Hamza-Bula:curved-bottom-navigation:1.0.0")
 }
-
 Usage
-
 1. Create Menu Resource
 Create res/menu/bottom_nav_menu.xml:
 xml<?xml version="1.0" encoding="utf-8"?>
@@ -35,27 +42,28 @@ xml<?xml version="1.0" encoding="utf-8"?>
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_home"
         android:title="Home" />
+    
     <item
         android:id="@+id/nav_dashboard"
         android:icon="@drawable/ic_dashboard"
         android:title="Dashboard" />
+    
     <item
         android:id="@+id/nav_notifications"
         android:icon="@drawable/ic_notifications"
         android:title="Notifications" />
+    
     <item
         android:id="@+id/nav_profile"
         android:icon="@drawable/ic_profile"
         android:title="Profile" />
 </menu>
-
 2. Add to Layout
 xml<com.hamza.curvedbottomnavigation.CustomBottomNavigationView
     android:id="@+id/bottom_navigation"
     android:layout_width="match_parent"
     android:layout_height="55dp"
     app:layout_constraintBottom_toBottomOf="parent" />
-
 3. Setup in Activity/Fragment
 kotlinval bottomNavigation = findViewById<CustomBottomNavigationView>(R.id.bottom_navigation)
 
@@ -80,10 +88,8 @@ bottomNavigation.setOnItemSelectedListener(object : CustomBottomNavigationView.O
         }
     }
 })
-
 Customization
-
-XML Attributes:
+XML Attributes
 xml<com.hamza.curvedbottomnavigation.CustomBottomNavigationView
     android:id="@+id/bottom_navigation"
     android:layout_width="match_parent"
@@ -101,21 +107,16 @@ xml<com.hamza.curvedbottomnavigation.CustomBottomNavigationView
     
     app:bubbleAnimationDuration="500"
     app:iconAnimationDuration="1000" />
-
-Programmatically:
-
+Programmatically
 kotlinbottomNavigation.apply {
     navBackgroundColor = Color.parseColor("#2E2E2E")
     selectedIconBackgroundColor = Color.parseColor("#FF5722")
     selectedIconColor = Color.WHITE
     bubbleAnimationDuration = 500L
 }
-
 Customization Options
-
 AttributeTypeDefaultDescriptionnavBackgroundColorcolor#2E2E2ENavigation bar backgroundselectedIconBackgroundColorcolor#2E2E2ESelected icon backgroundborderColorcolor#FFFFFFTop border colorselectedIconColorcolor#FFFFFFSelected icon tintunselectedIconColorcolor#CCCCCCUnselected icon tintbubbleRadiusdimension200dpBubble sizeselectedIconSizedimension68dpSelected icon sizeunselectedIconSizedimension64dpUnselected icon sizebubbleAnimationDurationinteger500Bubble animation duration (ms)iconAnimationDurationinteger1000Icon animation duration (ms)bubbleWidthMultiplierfloat2.0Bubble width controlbubbleHeightFactorfloat0.6Bubble height controliconScaleOvershootfloat1.5Icon scale bounce effect
 For all available attributes, see attrs.xml.
-
 Requirements
 
 Minimum SDK: 24 (Android 7.0+)
@@ -131,7 +132,7 @@ Support for 2-5 navigation items
 Extensive customization options
 
 License
-Copyright 2025 Hamza Bula
+Copyright 2024-2025 Hamza Bula
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
