@@ -19,3 +19,10 @@ dependencyResolutionManagement {
         maven { url = uri("https://jitpack.io") }
     }
 }
+
+
+Add the dependency:
+
+dependencies {
+    implementation("com.github.Hamza-Bula:curved-bottom-navigation:1.0.0")
+}
