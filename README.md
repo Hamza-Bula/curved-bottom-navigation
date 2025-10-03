@@ -18,18 +18,227 @@ A modern Android bottom navigation bar with a unique curved bubble design and sm
 
 ## Download
 
-Step 1: Add JitPack repository
-Add JitPack repository to your root settings.gradle.kts:
-kotlindependencyResolutionManagement {
+### Step 1: Add JitPack repository
+
+Add JitPack repository to your root `settings.gradle.kts`:
+
+```kotlin
+dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
         maven { url = uri("https://jitpack.io") }
     }
 }
+```
 
-Step 2: Add the dependency
-Add the dependency in your app module's build.gradle.kts:
-kotlindependencies {
+### Step 2: Add the dependency
+
+Add the dependency in your app module's `build.gradle.kts`:
+
+```kotlin
+dependencies {
     implementation("com.github.Hamza-Bula:curved-bottom-navigation:1.0.0")
 }
+```
+
+## Usage
+
+### 1. Add to your layout
+
+Add the `CustomBottomNavigationView` to your layout XML:
+
+```xml
+<com.hamza.curvedbottomnavigation.CustomBottomNavigationView
+    android:id="@+id/bottom_navigation"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    app:layout_constraintBottom_toBottomOf="parent" />
+```
+
+### 2. Setup in Activity
+
+Initialize and configure the navigation in your Activity:
+
+```kotlin
+val bottomNavigation = findViewById<CustomBottomNavigationView>(R.id.bottom_navigation)
+
+// Set navigation items
+bottomNavigation.setNavigationItems(
+    listOf(
+        NavItem(R.id.nav_home, R.drawable.ic_home, "Home"),
+        NavItem(R.id.nav_dashboard, R.drawable.ic_dashboard, "Dashboard"),
+        NavItem(R.id.nav_notifications, R.drawable.ic_notifications, "Notifications"),
+        NavItem(R.id.nav_profile, R.drawable.ic_profile, "Profile")
+    )
+)
+
+// Handle item selection
+bottomNavigation.setOnItemSelectedListener(object : CustomBottomNavigationView.OnItemSelectedListener {
+    override fun onItemSelected(itemId: Int) {
+        when (itemId) {
+            R.id.nav_home -> loadFragment(HomeFragment())
+            R.id.nav_dashboard -> loadFragment(DashboardFragment())
+            R.id.nav_notifications -> loadFragment(NotificationsFragment())
+            R.id.nav_profile -> loadFragment(ProfileFragment())
+        }
+    }
+})
+
+// Optionally set initial selected item
+bottomNavigation.setSelectedItem(R.id.nav_home)
+```
+
+### 3. Fragment loading helper
+
+Create a helper method to load fragments:
+
+```kotlin
+private fun loadFragment(fragment: Fragment) {
+    supportFragmentManager.beginTransaction()
+        .replace(R.id.fragment_container, fragment)
+        .commit()
+}
+```
+
+## Customization
+
+### XML Attributes
+
+Customize the appearance using XML attributes:
+
+```xml
+<com.hamza.curvedbottomnavigation.CustomBottomNavigationView
+    android:id="@+id/bottom_navigation"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    
+    app:navBackgroundColor="#2E2E2E"
+    app:selectedIconBackgroundColor="#FF5722"
+    app:selectedIconColor="#FFFFFF"
+    app:unselectedIconColor="#AAAAAA"
+    app:borderColor="#FFFFFF"
+    
+    app:bubbleRadius="200dp"
+    app:selectedIconSize="68dp"
+    app:unselectedIconSize="64dp"
+    
+    app:bubbleAnimationDuration="500"
+    app:iconAnimationDuration="1000" />
+```
+
+### Programmatic Customization
+
+You can also customize the navigation programmatically:
+
+```kotlin
+bottomNavigation.apply {
+    navBackgroundColor = Color.parseColor("#2E2E2E")
+    selectedIconBackgroundColor = Color.parseColor("#FF5722")
+    selectedIconColor = Color.WHITE
+    unselectedIconColor = Color.LTGRAY
+    borderColor = Color.WHITE
+    
+    bubbleRadius = 200f
+    selectedIconSize = 68
+    unselectedIconSize = 64
+    
+    bubbleAnimationDuration = 500L
+    iconAnimationDuration = 1000L
+}
+```
+
+## Available Attributes
+
+### Colors
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `navBackgroundColor` | color | `#2E2E2E` | Navigation bar background color |
+| `selectedIconBackgroundColor` | color | `#2E2E2E` | Selected icon background color |
+| `selectedIconColor` | color | `#FFFFFF` | Selected icon tint color |
+| `unselectedIconColor` | color | `#CCCCCC` | Unselected icon tint color |
+| `borderColor` | color | `#FFFFFF` | Top border color |
+
+### Dimensions
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `navHeight` | dimension | `200dp` | Navigation bar height |
+| `bubbleRadius` | dimension | `200dp` | Bubble radius size |
+| `selectedIconSize` | dimension | `68dp` | Selected icon size |
+| `unselectedIconSize` | dimension | `64dp` | Unselected icon size |
+| `selectedIconBackgroundRadius` | dimension | `46dp` | Selected icon background circle radius |
+| `borderStrokeWidth` | dimension | `3dp` | Top border stroke width |
+| `selectedIconY` | dimension | `50dp` | Selected icon Y position |
+
+### Bubble Shape Properties
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `bubbleWidthMultiplier` | float | `2.0` | Bubble width multiplier |
+| `bubbleHeightFactor` | float | `0.6` | Bubble height factor |
+| `bubbleCurveFactor` | float | `0.2` | Bubble curve factor |
+| `bubbleEdgeFactor` | float | `0.4` | Bubble edge factor |
+
+### Animation Properties
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `bubbleAnimationDuration` | integer | `500` | Bubble animation duration (ms) |
+| `iconAnimationDuration` | integer | `1000` | Icon animation duration (ms) |
+| `iconScaleMin` | float | `0.3` | Minimum icon scale |
+| `iconScaleMax` | float | `1.0` | Maximum icon scale |
+| `iconScaleOvershoot` | float | `1.5` | Icon scale overshoot factor |
+| `iconPositionOvershoot` | float | `1.2` | Icon position overshoot factor |
+
+See [`attrs.xml`](curvedbottomnavigation/src/main/res/values/attrs.xml) for all available attributes.
+
+## Requirements
+
+- **Minimum SDK**: 24 (Android 7.0)
+- **Target SDK**: 35
+- **Kotlin**: 2.0.21+
+- **AndroidX**: Required
+
+## Sample App
+
+Check out the [sample app](app) for complete examples and implementation details.
+
+## License
+
+```
+Copyright 2024-2025 Hamza Bula
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## Author
+
+**Hamza Bula** - [@Hamza-Bula](https://github.com/Hamza-Bula)
+
+## Support
+
+If you find this library useful, please consider giving it a ⭐ on GitHub!
+
+For issues, questions, or suggestions, please [open an issue](https://github.com/Hamza-Bula/curved-bottom-navigation/issues).
