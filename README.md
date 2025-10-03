@@ -8,18 +8,26 @@ A modern Android bottom navigation bar with a unique curved bubble design and sm
 
 ![Demo](art/demo.gif)
 
-Features
+## Features
 
-Curved bubble design with elevation effect
-Smooth animations with customizable interpolators
-Highly customizable colors, sizes, and animations
-Simple API with XML and programmatic configuration
-Lightweight with minimal dependencies
+- **Curved bubble design** with elevation effect
+- **Smooth animations** with customizable interpolators
+- **Highly customizable** colors, sizes, and animations
+- **Simple API** with XML and programmatic configuration
+- **Lightweight** with minimal dependencies
+- **Supports 2-5 navigation items** with automatic validation
 
-Download
-Step 1: Add JitPack repository
-Add JitPack repository to your root settings.gradle.kts:
-kotlindependencyResolutionManagement {
+## Requirements
+
+- **Minimum SDK**: 24 (Android 7.0)
+
+## Download
+
+### Step 1: Add JitPack repository
+
+Add JitPack repository to your root `settings.gradle.kts`:
+```kotlin
+dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
@@ -32,53 +40,77 @@ kotlindependencies {
     implementation("com.github.Hamza-Bula:curved-bottom-navigation:1.0.0")
 }
 Usage
-1. Add to your layout
+1. Create menu resource file
+Create a menu file at res/menu/bottom_nav_menu.xml:
+xml<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Home" />
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/baseline_dashboard_24"
+        android:title="Dashboard" />
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/baseline_notifications_24"
+        android:title="Notifications" />
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/baseline_person_24"
+        android:title="Profile" />
+</menu>
+2. Add to your layout
 Add the CustomBottomNavigationView to your layout XML:
 xml<com.hamza.curvedbottomnavigation.CustomBottomNavigationView
-    android:id="@+id/bottom_navigation"
+    android:id="@+id/custom_bottom_navigation"
     android:layout_width="match_parent"
     android:layout_height="55dp"
     app:layout_constraintBottom_toBottomOf="parent" />
-2. Setup in Activity
-Initialize and configure the navigation in your Activity:
-kotlinval bottomNavigation = findViewById<CustomBottomNavigationView>(R.id.bottom_navigation)
+3. Setup in MainActivity
+kotlinclass MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-// Set navigation items
-bottomNavigation.setNavigationItems(
-    listOf(
-        NavItem(R.id.nav_home, R.drawable.ic_home, "Home"),
-        NavItem(R.id.nav_dashboard, R.drawable.ic_dashboard, "Dashboard"),
-        NavItem(R.id.nav_notifications, R.drawable.ic_notifications, "Notifications"),
-        NavItem(R.id.nav_profile, R.drawable.ic_profile, "Profile")
-    )
-)
+        val bottomNavigation = findViewById<CustomBottomNavigationView>(R.id.custom_bottom_navigation)
 
-// Handle item selection
-bottomNavigation.setOnItemSelectedListener(object : CustomBottomNavigationView.OnItemSelectedListener {
-    override fun onItemSelected(itemId: Int) {
-        when (itemId) {
-            R.id.nav_home -> loadFragment(HomeFragment())
-            R.id.nav_dashboard -> loadFragment(DashboardFragment())
-            R.id.nav_notifications -> loadFragment(NotificationsFragment())
-            R.id.nav_profile -> loadFragment(ProfileFragment())
+        bottomNavigation.setNavigationItems(listOf(
+            NavItem(R.id.navigation_home, R.drawable.baseline_home_24, "Home"),
+            NavItem(R.id.navigation_dashboard, R.drawable.baseline_dashboard_24, "Dashboard"),
+            NavItem(R.id.navigation_notifications, R.drawable.baseline_notifications_24, "Notifications"),
+            NavItem(R.id.navigation_profile, R.drawable.baseline_person_24, "Profile")
+        ))
+
+        bottomNavigation.setOnItemSelectedListener(object : CustomBottomNavigationView.OnItemSelectedListener {
+            override fun onItemSelected(itemId: Int) {
+                when (itemId) {
+                    R.id.navigation_home -> loadFragment(HomeFragment())
+                    R.id.navigation_dashboard -> loadFragment(DashboardFragment())
+                    R.id.navigation_notifications -> loadFragment(NotificationsFragment())
+                    R.id.navigation_profile -> loadFragment(ProfileFragment())
+                }
+            }
+        })
+
+        if (savedInstanceState == null) {
+            loadFragment(HomeFragment())
+            bottomNavigation.setSelectedItem(R.id.navigation_home)
         }
     }
-})
 
-// Optionally set initial selected item
-bottomNavigation.setSelectedItem(R.id.nav_home)
-3. Fragment loading helper
-Create a helper method to load fragments:
-kotlinprivate fun loadFragment(fragment: Fragment) {
-    supportFragmentManager.beginTransaction()
-        .replace(R.id.fragment_container, fragment)
-        .commit()
+    private fun loadFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
+    }
 }
 Customization
 XML Attributes
-Customize the appearance using XML attributes:
+Customize the appearance directly in your layout XML:
 xml<com.hamza.curvedbottomnavigation.CustomBottomNavigationView
-    android:id="@+id/bottom_navigation"
+    android:id="@+id/custom_bottom_navigation"
     android:layout_width="match_parent"
     android:layout_height="55dp"
     
@@ -95,7 +127,7 @@ xml<com.hamza.curvedbottomnavigation.CustomBottomNavigationView
     app:bubbleAnimationDuration="500"
     app:iconAnimationDuration="1000" />
 Programmatic Customization
-You can also customize the navigation programmatically:
+You can also customize properties programmatically:
 kotlinbottomNavigation.apply {
     navBackgroundColor = Color.parseColor("#2E2E2E")
     selectedIconBackgroundColor = Color.parseColor("#FF5722")
@@ -112,23 +144,31 @@ kotlinbottomNavigation.apply {
 }
 Available Attributes
 Colors
-AttributeTypeDefaultDescriptionnavBackgroundColorcolor#2E2E2ENavigation bar background colorselectedIconBackgroundColorcolor#2E2E2ESelected icon background colorselectedIconColorcolor#FFFFFFSelected icon tint colorunselectedIconColorcolor#CCCCCCUnselected icon tint colorborderColorcolor#FFFFFFTop border color
+AttributeTypeDefaultDescriptionnavBackgroundColorcolor#2E2E2ENavigation bar background colorselectedIconBackgroundColorcolor#2E2E2ESelected icon background circle colorselectedIconColorcolor#FFFFFFSelected icon tint colorunselectedIconColorcolor#CCCCCCUnselected icon tint colorborderColorcolor#FFFFFFTop border line color
 Dimensions
-AttributeTypeDefaultDescriptionnavHeightdimension200dpNavigation bar heightbubbleRadiusdimension200dpBubble radius sizeselectedIconSizedimension68dpSelected icon sizeunselectedIconSizedimension64dpUnselected icon sizeselectedIconBackgroundRadiusdimension46dpSelected icon background circle radiusborderStrokeWidthdimension3dpTop border stroke widthselectedIconYdimension50dpSelected icon Y position
+AttributeTypeDefaultDescriptionnavHeightdimension200dpNavigation bar heightbubbleRadiusdimension200dpBubble radius sizeselectedIconSizedimension68dpSelected icon sizeunselectedIconSizedimension64dpUnselected icon sizeselectedIconBackgroundRadiusdimension46dpSelected icon background circle radiusborderStrokeWidthdimension3dpTop border stroke widthselectedIconYdimension50dpSelected icon Y position from top
 Bubble Shape Properties
-AttributeTypeDefaultDescriptionbubbleWidthMultiplierfloat2.0Bubble width multiplierbubbleHeightFactorfloat0.6Bubble height factorbubbleCurveFactorfloat0.2Bubble curve factorbubbleEdgeFactorfloat0.4Bubble edge factor
+AttributeTypeDefaultDescriptionbubbleWidthMultiplierfloat2.0Controls bubble width relative to radiusbubbleHeightFactorfloat0.6Controls bubble curve depthbubbleCurveFactorfloat0.2Controls curve smoothnessbubbleEdgeFactorfloat0.4Controls bubble edge width
 Animation Properties
-AttributeTypeDefaultDescriptionbubbleAnimationDurationinteger500Bubble animation duration (ms)iconAnimationDurationinteger1000Icon animation duration (ms)iconScaleMinfloat0.3Minimum icon scaleiconScaleMaxfloat1.0Maximum icon scaleiconScaleOvershootfloat1.5Icon scale overshoot factoriconPositionOvershootfloat1.2Icon position overshoot factor
-See attrs.xml for all available attributes.
-Requirements
+AttributeTypeDefaultDescriptionbubbleAnimationDurationinteger500Bubble movement animation duration (ms)iconAnimationDurationinteger1000Icon animation duration (ms)iconScaleMinfloat0.3Minimum icon scale during animationiconScaleMaxfloat1.0Maximum icon scale after animationiconScaleOvershootfloat1.5Icon scale overshoot amounticonPositionOvershootfloat1.2Icon position overshoot amount
+See attrs.xml for the complete list of available attributes.
+Important Notes
 
-Minimum SDK: 24 (Android 7.0)
-Target SDK: 35
-Kotlin: 2.0.21+
-AndroidX: Required
+The library supports 2 to 5 navigation items
+Less than 2 items: Warning shown, but will work
+More than 5 items: Only first 5 items used, warning shown
 
 Sample App
 Check out the sample app for complete examples and implementation details.
+Troubleshooting
+Icons not showing
+Make sure your drawable resources exist in res/drawable/:
+res/
+  drawable/
+    baseline_home_24.xml
+    baseline_dashboard_24.xml
+    baseline_notifications_24.xml
+    baseline_person_24.xml
 License
 Copyright 2024-2025 Hamza Bula
 
