@@ -43,26 +43,26 @@ Create a menu file at res/menu/bottom_nav_menu.xml:
 xml<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_home"
-        android:icon="@drawable/ic_home"
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/baseline_home_24"
         android:title="Home" />
     <item
-        android:id="@+id/nav_dashboard"
-        android:icon="@drawable/ic_dashboard"
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/baseline_dashboard_24"
         android:title="Dashboard" />
     <item
-        android:id="@+id/nav_notifications"
-        android:icon="@drawable/ic_notifications"
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/baseline_notifications_24"
         android:title="Notifications" />
     <item
-        android:id="@+id/nav_profile"
-        android:icon="@drawable/ic_profile"
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/baseline_person_24"
         android:title="Profile" />
 </menu>
 2. Add to your layout
 Add the CustomBottomNavigationView to your layout XML:
 xml<com.hamza.curvedbottomnavigation.CustomBottomNavigationView
-    android:id="@+id/bottom_navigation"
+    android:id="@+id/custom_bottom_navigation"
     android:layout_width="match_parent"
     android:layout_height="55dp"
     app:layout_constraintBottom_toBottomOf="parent" />
@@ -108,7 +108,7 @@ Customization
 XML Attributes
 Customize the appearance directly in your layout XML:
 xml<com.hamza.curvedbottomnavigation.CustomBottomNavigationView
-    android:id="@+id/bottom_navigation"
+    android:id="@+id/custom_bottom_navigation"
     android:layout_width="match_parent"
     android:layout_height="55dp"
     
@@ -163,10 +163,10 @@ Icons not showing
 Make sure your drawable resources exist in res/drawable/:
 res/
   drawable/
-    ic_home.xml
-    ic_dashboard.xml
-    ic_notifications.xml
-    ic_profile.xml
+    baseline_home_24.xml
+    baseline_dashboard_24.xml
+    baseline_notifications_24.xml
+    baseline_person_24.xml
 License
 Copyright 2024-2025 Hamza Bula
 
