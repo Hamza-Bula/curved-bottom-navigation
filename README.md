@@ -1,103 +1,91 @@
-Features
+# Curved Bottom Navigation
 
-Curved bubble design with elevation effect
-Smooth animations with customizable interpolators
-Highly customizable colors, sizes, and animations
-Simple API with XML and programmatic configuration
-Lightweight with minimal dependencies
-Supports 2-5 navigation items with automatic validation
+[![JitPack](https://jitpack.io/v/Hamza-Bula/curved-bottom-navigation.svg)](https://jitpack.io/#Hamza-Bula/curved-bottom-navigation)
+[![API](https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=24)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
-Requirements
+A modern Android bottom navigation bar with a unique curved bubble design and smooth animations.
 
-Minimum SDK: 24 (Android 7.0)
+![Demo](art/demo.gif)
 
-Download
-Step 1: Add JitPack repository
-Add JitPack repository to your root settings.gradle.kts:
-kotlindependencyResolutionManagement {
+## Features
+
+- **Curved bubble design** with elevation effect
+- **Smooth animations** with customizable interpolators  
+- **Highly customizable** colors, sizes, and animations
+- **Simple API** with XML and programmatic configuration
+- **Lightweight** with minimal dependencies
+
+## Download
+
+**Step 1:** Add JitPack repository to your root `settings.gradle.kts`:
+```kotlin
+dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
         maven { url = uri("https://jitpack.io") }
     }
 }
-Step 2: Add the dependency
-Add the dependency in your app module's build.gradle.kts:
+Step 2: Add the dependency in build.gradle.kts:
 kotlindependencies {
     implementation("com.github.Hamza-Bula:curved-bottom-navigation:1.0.0")
 }
 Usage
-1. Create menu resource file
-Create a menu file at res/menu/bottom_nav_menu.xml:
+1. Create menu resource file res/menu/bottom_nav_menu.xml:
 xml<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/baseline_home_24"
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
         android:title="Home" />
     <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/baseline_dashboard_24"
+        android:id="@+id/nav_dashboard"
+        android:icon="@drawable/ic_dashboard"
         android:title="Dashboard" />
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/baseline_notifications_24"
+        android:id="@+id/nav_notifications"
+        android:icon="@drawable/ic_notifications"
         android:title="Notifications" />
     <item
-        android:id="@+id/navigation_profile"
-        android:icon="@drawable/baseline_person_24"
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_profile"
         android:title="Profile" />
 </menu>
-2. Add to your layout
-Add the CustomBottomNavigationView to your layout XML:
+2. Add to your layout:
 xml<com.hamza.curvedbottomnavigation.CustomBottomNavigationView
-    android:id="@+id/custom_bottom_navigation"
+    android:id="@+id/bottom_navigation"
     android:layout_width="match_parent"
     android:layout_height="55dp"
     app:layout_constraintBottom_toBottomOf="parent" />
-3. Setup in MainActivity
-kotlinclass MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+3. Setup in Activity:
+kotlinval bottomNavigation = findViewById<CustomBottomNavigationView>(R.id.bottom_navigation)
 
-        val bottomNavigation = findViewById<CustomBottomNavigationView>(R.id.custom_bottom_navigation)
+// Set navigation items
+bottomNavigation.setNavigationItems(
+    listOf(
+        NavItem(R.id.nav_home, R.drawable.ic_home, "Home"),
+        NavItem(R.id.nav_dashboard, R.drawable.ic_dashboard, "Dashboard"),
+        NavItem(R.id.nav_notifications, R.drawable.ic_notifications, "Notifications"),
+        NavItem(R.id.nav_profile, R.drawable.ic_profile, "Profile")
+    )
+)
 
-        bottomNavigation.setNavigationItems(listOf(
-            NavItem(R.id.navigation_home, R.drawable.baseline_home_24, "Home"),
-            NavItem(R.id.navigation_dashboard, R.drawable.baseline_dashboard_24, "Dashboard"),
-            NavItem(R.id.navigation_notifications, R.drawable.baseline_notifications_24, "Notifications"),
-            NavItem(R.id.navigation_profile, R.drawable.baseline_person_24, "Profile")
-        ))
-
-        bottomNavigation.setOnItemSelectedListener(object : CustomBottomNavigationView.OnItemSelectedListener {
-            override fun onItemSelected(itemId: Int) {
-                when (itemId) {
-                    R.id.navigation_home -> loadFragment(HomeFragment())
-                    R.id.navigation_dashboard -> loadFragment(DashboardFragment())
-                    R.id.navigation_notifications -> loadFragment(NotificationsFragment())
-                    R.id.navigation_profile -> loadFragment(ProfileFragment())
-                }
-            }
-        })
-
-        if (savedInstanceState == null) {
-            loadFragment(HomeFragment())
-            bottomNavigation.setSelectedItem(R.id.navigation_home)
+// Handle item selection
+bottomNavigation.setOnItemSelectedListener(object : CustomBottomNavigationView.OnItemSelectedListener {
+    override fun onItemSelected(itemId: Int) {
+        when (itemId) {
+            R.id.nav_home -> loadFragment(HomeFragment())
+            R.id.nav_dashboard -> loadFragment(DashboardFragment())
+            R.id.nav_notifications -> loadFragment(NotificationsFragment())
+            R.id.nav_profile -> loadFragment(ProfileFragment())
         }
     }
-
-    private fun loadFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .commit()
-    }
-}
+})
 Customization
 XML Attributes
-Customize the appearance directly in your layout XML:
 xml<com.hamza.curvedbottomnavigation.CustomBottomNavigationView
-    android:id="@+id/custom_bottom_navigation"
+    android:id="@+id/bottom_navigation"
     android:layout_width="match_parent"
     android:layout_height="55dp"
     
@@ -108,54 +96,24 @@ xml<com.hamza.curvedbottomnavigation.CustomBottomNavigationView
     app:borderColor="#FFFFFF"
     
     app:bubbleRadius="200dp"
-    app:selectedIconSize="68dp"
-    app:unselectedIconSize="64dp"
-    
     app:bubbleAnimationDuration="500"
     app:iconAnimationDuration="1000" />
-Programmatic Customization
-You can also customize properties programmatically:
+Programmatically
 kotlinbottomNavigation.apply {
     navBackgroundColor = Color.parseColor("#2E2E2E")
     selectedIconBackgroundColor = Color.parseColor("#FF5722")
     selectedIconColor = Color.WHITE
-    unselectedIconColor = Color.LTGRAY
-    borderColor = Color.WHITE
-    
-    bubbleRadius = 200f
-    selectedIconSize = 68
-    unselectedIconSize = 64
-    
     bubbleAnimationDuration = 500L
-    iconAnimationDuration = 1000L
 }
 Available Attributes
-Colors
-AttributeTypeDefaultDescriptionnavBackgroundColorcolor#2E2E2ENavigation bar background colorselectedIconBackgroundColorcolor#2E2E2ESelected icon background circle colorselectedIconColorcolor#FFFFFFSelected icon tint colorunselectedIconColorcolor#CCCCCCUnselected icon tint colorborderColorcolor#FFFFFFTop border line color
-Dimensions
-AttributeTypeDefaultDescriptionnavHeightdimension200dpNavigation bar heightbubbleRadiusdimension200dpBubble radius sizeselectedIconSizedimension68dpSelected icon sizeunselectedIconSizedimension64dpUnselected icon sizeselectedIconBackgroundRadiusdimension46dpSelected icon background circle radiusborderStrokeWidthdimension3dpTop border stroke widthselectedIconYdimension50dpSelected icon Y position from top
-Bubble Shape Properties
-AttributeTypeDefaultDescriptionbubbleWidthMultiplierfloat2.0Controls bubble width relative to radiusbubbleHeightFactorfloat0.6Controls bubble curve depthbubbleCurveFactorfloat0.2Controls curve smoothnessbubbleEdgeFactorfloat0.4Controls bubble edge width
-Animation Properties
-AttributeTypeDefaultDescriptionbubbleAnimationDurationinteger500Bubble movement animation duration (ms)iconAnimationDurationinteger1000Icon animation duration (ms)iconScaleMinfloat0.3Minimum icon scale during animationiconScaleMaxfloat1.0Maximum icon scale after animationiconScaleOvershootfloat1.5Icon scale overshoot amounticonPositionOvershootfloat1.2Icon position overshoot amount
-See attrs.xml for the complete list of available attributes.
-Important Notes
+AttributeTypeDefaultDescriptionnavBackgroundColorcolor#2E2E2ENavigation bar backgroundselectedIconBackgroundColorcolor#2E2E2ESelected icon backgroundselectedIconColorcolor#FFFFFFSelected icon tintunselectedIconColorcolor#CCCCCCUnselected icon tintbubbleRadiusdimension200dpBubble sizeselectedIconSizedimension68dpSelected icon sizeunselectedIconSizedimension64dpUnselected icon sizebubbleAnimationDurationinteger500Animation duration (ms)
+See attrs.xml for all attributes.
+Requirements
 
-The library supports 2 to 5 navigation items
-Less than 2 items: Warning shown, but will work
-More than 5 items: Only first 5 items used, warning shown
+Minimum SDK: 24
 
-Sample App
-Check out the sample app for complete examples and implementation details.
-Troubleshooting
-Icons not showing
-Make sure your drawable resources exist in res/drawable/:
-res/
-  drawable/
-    baseline_home_24.xml
-    baseline_dashboard_24.xml
-    baseline_notifications_24.xml
-    baseline_person_24.xml
+Sample
+Check out the sample app for complete examples.
 License
 Copyright 2024-2025 Hamza Bula
 
@@ -172,15 +130,5 @@ See the License for the specific language governing permissions and
 limitations under the License.
 Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
-
-Fork the repository
-Create your feature branch (git checkout -b feature/AmazingFeature)
-Commit your changes (git commit -m 'Add some AmazingFeature')
-Push to the branch (git push origin feature/AmazingFeature)
-Open a Pull Request
-
 Author
 Hamza Bula - @Hamza-Bula
-Support
-If you find this library useful, please consider giving it a ⭐ on GitHub!
-For issues, questions, or suggestions, please open an issue.
