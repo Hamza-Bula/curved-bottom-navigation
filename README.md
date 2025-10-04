@@ -108,6 +108,10 @@ Add the CustomBottomNavigationView to your `activity_main.xml`:
 ### 3. Setup in MainActivity
 
 ```kotlin
+// Import required classes
+import com.hamza.curvedbottomnavigation.CustomBottomNavigationView
+import com.hamza.curvedbottomnavigation.NavItem
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -265,6 +269,10 @@ res/
     baseline_notifications_24.xml
     baseline_person_24.xml
 ```
+
+### Fragments not created
+
+Make sure you have created the required Fragment classes (`HomeFragment`, `DashboardFragment`, `NotificationsFragment`, `ProfileFragment`) in your project.
 
 ## License
 
