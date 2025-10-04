@@ -8,26 +8,23 @@ A modern Android bottom navigation bar with a unique curved bubble design and sm
 
 ![Demo](art/demo.gif)
 
-## Features
+Features
 
-- **Curved bubble design** with elevation effect
-- **Smooth animations** with customizable interpolators
-- **Highly customizable** colors, sizes, and animations
-- **Simple API** with XML and programmatic configuration
-- **Lightweight** with minimal dependencies
-- **Supports 2-5 navigation items** with automatic validation
+Curved bubble design with elevation effect
+Smooth animations with customizable interpolators
+Highly customizable colors, sizes, and animations
+Simple API with XML and programmatic configuration
+Lightweight with minimal dependencies
+Supports 2-5 navigation items with automatic validation
 
-## Requirements
+Requirements
 
-- **Minimum SDK**: 24 (Android 7.0)
+Minimum SDK: 24 (Android 7.0)
 
-## Download
-
-### Step 1: Add JitPack repository
-
-Add JitPack repository to your root `settings.gradle.kts`:
-```kotlin
-dependencyResolutionManagement {
+Download
+Step 1: Add JitPack repository
+Add JitPack repository to your root settings.gradle.kts:
+kotlindependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
@@ -153,8 +150,8 @@ Animation Properties
 AttributeTypeDefaultDescriptionbubbleAnimationDurationinteger500Bubble movement animation duration (ms)iconAnimationDurationinteger1000Icon animation duration (ms)iconScaleMinfloat0.3Minimum icon scale during animationiconScaleMaxfloat1.0Maximum icon scale after animationiconScaleOvershootfloat1.5Icon scale overshoot amounticonPositionOvershootfloat1.2Icon position overshoot amount
 See attrs.xml for the complete list of available attributes.
 Important Notes
+The library supports 2 to 5 navigation items:
 
-The library supports 2 to 5 navigation items
 Less than 2 items: Warning shown, but will work
 More than 5 items: Only first 5 items used, warning shown
 
