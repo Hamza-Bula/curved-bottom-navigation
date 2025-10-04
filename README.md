@@ -26,8 +26,6 @@ Minimum SDK: 24 (Android 7.0)
 ### Step 1: Add JitPack repository
 
 Add JitPack repository to your root `settings.gradle.kts`:
-
-[BLANK LINE HERE]
 ```kotlin
 dependencyResolutionManagement {
     repositories {
@@ -36,10 +34,8 @@ dependencyResolutionManagement {
         maven { url = uri("https://jitpack.io") }
     }
 }
-[BLANK LINE HERE]
 Step 2: Add the dependency
 Add the dependency in your app module's build.gradle.kts:
-[BLANK LINE HERE]
 kotlindependencies {
     implementation("com.github.Hamza-Bula:curved-bottom-navigation:1.0.0")
 }
