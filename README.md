@@ -34,6 +34,7 @@ dependencyResolutionManagement {
         maven { url = uri("https://jitpack.io") }
     }
 }
+
 Step 2: Add the dependency
 Add the dependency in your app module's build.gradle.kts:
 kotlindependencies {
