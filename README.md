@@ -8,18 +8,18 @@ A modern Android bottom navigation bar with a unique curved bubble design and sm
 
 ![Demo](art/demo.gif)
 
-Features
+## Features
 
-Curved bubble design with elevation effect
-Smooth animations with customizable interpolators
-Highly customizable colors, sizes, and animations
-Simple API with XML and programmatic configuration
-Lightweight with minimal dependencies
-Supports 2-5 navigation items with automatic validation
+- **Curved bubble design** with elevation effect
+- **Smooth animations** with customizable interpolators
+- **Highly customizable** colors, sizes, and animations
+- **Simple API** with XML and programmatic configuration
+- **Lightweight** with minimal dependencies
+- **Supports 2-5 navigation items** with automatic validation
 
-Requirements
+## Requirements
 
-Minimum SDK: 24 (Android 7.0)
+- **Minimum SDK**: 24 (Android 7.0)
 
 ## Download
 
