@@ -77,14 +77,32 @@ Create a menu file at `res/menu/bottom_nav_menu.xml`:
 
 ### 2. Add to your layout
 
-Add the CustomBottomNavigationView to your layout XML:
+Add the CustomBottomNavigationView to your `activity_main.xml`:
 
 ```xml
-<com.hamza.curvedbottomnavigation.CustomBottomNavigationView
-    android:id="@+id/custom_bottom_navigation"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="55dp"
-    app:layout_constraintBottom_toBottomOf="parent" />
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/custom_bottom_navigation"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.hamza.curvedbottomnavigation.CustomBottomNavigationView
+        android:id="@+id/custom_bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
 ### 3. Setup in MainActivity
