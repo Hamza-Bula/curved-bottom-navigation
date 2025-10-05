@@ -161,20 +161,34 @@ Customize the appearance directly in your layout XML:
 <com.hamza.curvedbottomnavigation.CustomBottomNavigationView
     android:id="@+id/custom_bottom_navigation"
     android:layout_width="match_parent"
-    android:layout_height="55dp"
-    
-    app:navBackgroundColor="#2E2E2E"
-    app:selectedIconBackgroundColor="#FF5722"
-    app:selectedIconColor="#FFFFFF"
-    app:unselectedIconColor="#AAAAAA"
-    app:borderColor="#FFFFFF"
-    
-    app:bubbleRadius="200dp"
-    app:selectedIconSize="68dp"
-    app:unselectedIconSize="64dp"
-    
+    android:layout_height="65dp"
+
+    app:borderColor="#6200EE"
+    app:borderStrokeWidth="2dp"
     app:bubbleAnimationDuration="500"
-    app:iconAnimationDuration="1000" />
+    app:bubbleCurveFactor="0.2"
+    app:bubbleEdgeFactor="0.4"
+
+    app:bubbleHeightFactor="0.6"
+    app:bubbleRadius="100dp"
+    app:bubbleWidthMultiplier="2.0"
+    app:iconAnimationDuration="1000"
+    app:iconPositionOvershoot="1.2"
+    app:iconScaleMax="1.0"
+    app:iconScaleMin="0.3"
+
+    app:iconScaleOvershoot="1.5"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:navBackgroundColor="#1E1E1E"
+    app:navHeight="60dp"
+
+    app:selectedIconBackgroundColor="#6200EE"
+    app:selectedIconBackgroundRadius="22dp"
+    app:selectedIconColor="#FFFFFF"
+    app:selectedIconSize="28dp"
+    app:selectedIconY="30dp"
+    app:unselectedIconColor="#999999"
+    app:unselectedIconSize="24dp" />
 ```
 
 ### Programmatic Customization
@@ -183,18 +197,31 @@ You can also customize properties programmatically:
 
 ```kotlin
 bottomNavigation.apply {
-    navBackgroundColor = Color.parseColor("#2E2E2E")
-    selectedIconBackgroundColor = Color.parseColor("#FF5722")
+    navBackgroundColor = Color.parseColor("#1E1E1E")
+    selectedIconBackgroundColor = Color.parseColor("#6200EE")
     selectedIconColor = Color.WHITE
-    unselectedIconColor = Color.LTGRAY
-    borderColor = Color.WHITE
+    unselectedIconColor = Color.parseColor("#999999")
+    borderColor = Color.parseColor("#6200EE")
     
-    bubbleRadius = 200f
-    selectedIconSize = 68
-    unselectedIconSize = 64
+    navHeight = 60f
+    bubbleRadius = 100f
+    selectedIconSize = 28
+    unselectedIconSize = 24
+    selectedIconBackgroundRadius = 22f
+    borderStrokeWidth = 2f
+    selectedIconY = 30f
+    
+    bubbleWidthMultiplier = 2.0f
+    bubbleHeightFactor = 0.6f
+    bubbleCurveFactor = 0.2f
+    bubbleEdgeFactor = 0.4f
     
     bubbleAnimationDuration = 500L
     iconAnimationDuration = 1000L
+    iconScaleMin = 0.3f
+    iconScaleMax = 1.0f
+    iconScaleOvershoot = 1.5f
+    iconPositionOvershoot = 1.2f
 }
 ```
 
