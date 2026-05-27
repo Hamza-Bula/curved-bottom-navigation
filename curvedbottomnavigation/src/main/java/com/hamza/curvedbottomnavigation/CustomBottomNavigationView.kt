@@ -14,7 +14,6 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import kotlin.properties.Delegates
 import androidx.core.graphics.toColorInt
-import com.hamza.curvedbottomnavigation.R
 
 class CustomBottomNavigationView @JvmOverloads constructor(
     context: Context,

@@ -46,14 +46,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-
         if (savedInstanceState == null) {
             loadFragment(HomeFragment())
             bottomNavigation.setSelectedItem(R.id.navigation_home)
         }
 
     }
-
     private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
